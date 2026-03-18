@@ -6,10 +6,11 @@ A full-stack SaaS application built with a **client-server architecture**, featu
 
 ## 📌 Project Structure
 
+```
 SAAS-app/
 ├── client/   # Frontend (React / Vite)
 ├── server/   # Backend (Node.js / Express)
-
+```
 
 ---
 
@@ -31,29 +32,32 @@ SAAS-app/
 
 ## 🚀 Getting Started
 
-1️⃣ Clone the repository
+### 1️⃣ Clone the repository
 
-
+```bash
 git clone https://github.com/ArnavAditya/SAAS-app.git
 cd SAAS-app
-
+```
 
 ---
 
 ### 2️⃣ Setup Backend
 
+```bash
 cd server
 npm install
 npm start
+```
 
 ---
 
 ### 3️⃣ Setup Frontend
 
+```bash
 cd client
 npm install
 npm run dev
-
+```
 
 ---
 
@@ -61,9 +65,9 @@ npm run dev
 
 Create a `.env` file in the `server` folder and add:
 
+```
 PORT=5000
-
-
+```
 
 
 ---
@@ -76,7 +80,6 @@ PORT=5000
 * Scalable SaaS-ready setup
 
 ---
-
 
 ## 👨‍💻 Author
 
