@@ -19,7 +19,7 @@ export const generateArticle = async (req, res)=>{
         const free_usage = req.free_usage;
 
         if(plan !== 'premium' && free_usage >= 10){
-            return res.json({ success: false, message: "Limit reached. Upgrade to continue."})
+            return res.status(403).json({ success: false, message: "Limit reached. Upgrade to continue."})
         }
 
         const response = await AI.chat.completions.create({
@@ -51,7 +51,7 @@ export const generateArticle = async (req, res)=>{
 
     } catch (error) {
         console.log(error.message)
-        res.json({success: false, message: error.message})
+        res.status(500).json({success: false, message: error.message})
     }
 }
 
@@ -63,7 +63,7 @@ export const generateBlogTitle = async (req, res)=>{
         const free_usage = req.free_usage;
 
         if(plan !== 'premium' && free_usage >= 10){
-            return res.json({ success: false, message: "Limit reached. Upgrade to continue."})
+            return res.status(403).json({ success: false, message: "Limit reached. Upgrade to continue."})
         }
 
         const response = await AI.chat.completions.create({
@@ -91,7 +91,7 @@ export const generateBlogTitle = async (req, res)=>{
 
     } catch (error) {
         console.log(error.message)
-        res.json({success: false, message: error.message})
+        res.status(500).json({success: false, message: error.message})
     }
 }
 
@@ -103,7 +103,7 @@ export const generateImage = async (req, res)=>{
         const plan = req.plan;
 
         if(plan !== 'premium'){
-            return res.json({ success: false, message: "This feature is only available for premium subscriptions"})
+            return res.status(403).json({ success: false, message: "This feature is only available for premium subscriptions"})
         }
 
         
@@ -126,7 +126,7 @@ export const generateImage = async (req, res)=>{
 
     } catch (error) {
         console.log(error.message)
-        res.json({success: false, message: error.message})
+        res.status(500).json({success: false, message: error.message})
     }
 }
 
@@ -137,7 +137,7 @@ export const removeImageBackground = async (req, res)=>{
         const plan = req.plan;
 
         if(plan !== 'premium'){
-            return res.json({ success: false, message: "This feature is only available for premium subscriptions"})
+            return res.status(403).json({ success: false, message: "This feature is only available for premium subscriptions"})
         }
 
         const {secure_url} = await cloudinary.uploader.upload(image.path, {
@@ -156,7 +156,7 @@ export const removeImageBackground = async (req, res)=>{
 
     } catch (error) {
         console.log(error.message)
-        res.json({success: false, message: error.message})
+        res.status(500).json({success: false, message: error.message})
     }
 }
 
@@ -168,7 +168,7 @@ export const removeImageObject = async (req, res)=>{
         const plan = req.plan;
 
         if(plan !== 'premium'){
-            return res.json({ success: false, message: "This feature is only available for premium subscriptions"})
+            return res.status(403).json({ success: false, message: "This feature is only available for premium subscriptions"})
         }
 
         const {public_id} = await cloudinary.uploader.upload(image.path)
@@ -185,7 +185,7 @@ export const removeImageObject = async (req, res)=>{
 
     } catch (error) {
         console.log(error.message)
-        res.json({success: false, message: error.message})
+        res.status(500).json({success: false, message: error.message})
     }
 }
 
@@ -196,11 +196,11 @@ export const resumeReview = async (req, res)=>{
         const plan = req.plan;
 
         if(plan !== 'premium'){
-            return res.json({ success: false, message: "This feature is only available for premium subscriptions"})
+            return res.status(403).json({ success: false, message: "This feature is only available for premium subscriptions"})
         }
 
         if(resume.size > 5 * 1024 * 1024){
-            return res.json({success: false, message: "Resume file size exceeds allowed size (5MB)."})
+            return res.status(400).json({success: false, message: "Resume file size exceeds allowed size (5MB)."})
         }
 
         const dataBuffer = fs.readFileSync(resume.path)
@@ -224,6 +224,6 @@ export const resumeReview = async (req, res)=>{
 
     } catch (error) {
         console.log(error.message)
-        res.json({success: false, message: error.message})
+        res.status(500).json({success: false, message: error.message})
     }
 }

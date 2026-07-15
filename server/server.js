@@ -10,7 +10,11 @@ const app = express()
 
 await connectCloudinary()
 
-app.use(cors())
+const allowedOrigins = process.env.CLIENT_URL
+    ? process.env.CLIENT_URL.split(',').map((origin) => origin.trim())
+    : true;
+
+app.use(cors({ origin: allowedOrigins }))
 app.use(express.json())
 app.use(clerkMiddleware())
 
