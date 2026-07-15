@@ -129,7 +129,12 @@ export const generateImage = async (req, res)=>{
         res.json({ success: true, content: secure_url})
 
     } catch (error) {
-        console.log(error.message)
+        if (error.response) {
+            console.log('ClipDrop error status:', error.response.status)
+            console.log('ClipDrop error body:', Buffer.from(error.response.data).toString())
+        } else {
+            console.log(error.message)
+        }
         res.status(500).json({success: false, message: error.message})
     }
 }
